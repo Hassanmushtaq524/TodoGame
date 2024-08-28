@@ -1,0 +1,22 @@
+### AUTH ENDPOINTS
+
+###
+GET http://localhost:13000/api/
+###
+
+###
+GET http://localhost:13000/api/auth/
+###
+
+###
+POST http://localhost:13000/api/auth/signup
+Content-Type: application/json
+
+{
+    "username": "hhmushtaq",
+    "email": "hhmushtaq@owu.edu",
+    "password": "Sufian135?"
+}
+###
+
+### TASKS ENDPOINTS
