@@ -23,7 +23,32 @@ router.get("/", async (req, res) => {
  */
 router.post("/login", async (req, res) => {
     try {
-        const { usernamem, password } = req.body; 
+        const { username, password } = req.body; 
+        
+        /**
+         * Find the user and compare passwords
+         */
+        let users = await pool.query(`SELECT * FROM users WHERE username = $1`, [username]);
+        if (!users.rows.length) {
+            return res.status(401).json({ success: false, message: "Incorrect username/password" });
+        }
+        
+        user = users.rows[0];
+        let check = await bcrypt.compareSync(password, user.password);
+
+        if (!check) {
+            return res.status(401).json({ success: false, message: "Incorrect username/password" });
+        }
+
+        const signData = {
+            user: {
+                _id: user._id
+            }
+        }
+
+        const jwtToken = jwt.sign(signData, jwtSecret);
+
+        return res.status(200).json({ success: true, token: jwtToken, user: user });
     } catch (error) {
         return res.status(500).json({ error });
     }
@@ -39,8 +64,8 @@ router.post("/signup", async (req, res) => {
         /**
          * Check if user already exists
         */
-        let user = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
-        if (user.rows.length) {
+        let users = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
+        if (users.rows.length) {
             return res.status(400).json({ success: false, message: "User is already registered" });
         }
         
@@ -51,12 +76,12 @@ router.post("/signup", async (req, res) => {
         
         const date = new Date();
         const dateStr = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-        const data = await pool.query(`INSERT INTO users (username, email, password, level, totalXp, createdAt, updatedAt) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        await pool.query(`INSERT INTO users (username, email, password, level, total_xp, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
                                 [username, email, secPass, 0, 0, dateStr, dateStr]);
         
         
-        user = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
-        user = user.rows[0];
+        users = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
+        user = users.rows[0];
         const signData = {
             user: {
                 _id: user._id

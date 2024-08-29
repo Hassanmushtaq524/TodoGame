@@ -1,22 +1,54 @@
-### AUTH ENDPOINTS
-
 ###
 GET http://localhost:13000/api/
 ###
 
-###
+### AUTH ENDPOINTS
+
+### for dev
 GET http://localhost:13000/api/auth/
 ###
 
-###
+### signup
 POST http://localhost:13000/api/auth/signup
 Content-Type: application/json
 
 {
-    "username": "hhmushtaq",
-    "email": "hhmushtaq@owu.edu",
+    "username": "hassanmushtak",
+    "email": "hassanmushtaq67@gmail.com",
     "password": "Sufian135?"
 }
 ###
 
+### login
+POST http://localhost:13000/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "hhmushtaq",
+    "password": "Sufian135?"
+}
+
 ### TASKS ENDPOINTS
+
+
+### for dev
+GET http://localhost:13000/api/tasks/all
+###
+
+### Fetch all tasks
+GET http://localhost:13000/api/tasks/
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk1Mjc0N30.ihOK4knDBup2v1wS5griUyRk_mHPweo6QSrViPjiQ5A
+###
+
+### Add a task
+POST http://localhost:13000/api/tasks/
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk1Mjc0N30.ihOK4knDBup2v1wS5griUyRk_mHPweo6QSrViPjiQ5A
+Content-Type: application/json
+
+{
+    "description": "Task 3",
+    "xpValue": 50
+}
+###
+
+
