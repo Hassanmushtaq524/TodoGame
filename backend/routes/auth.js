@@ -74,10 +74,9 @@ router.post("/signup", async (req, res) => {
          */
         let secPass = await bcrypt.hash(password, 10);
         
-        const date = new Date();
-        const dateStr = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+        const date = new Date().toISOString();
         await pool.query(`INSERT INTO users (username, email, password, level, total_xp, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-                                [username, email, secPass, 0, 0, dateStr, dateStr]);
+                                [username, email, secPass, 0, 0, date, dateStr]);
         
         
         users = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);

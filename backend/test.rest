@@ -37,18 +37,34 @@ GET http://localhost:13000/api/tasks/all
 
 ### Fetch all tasks
 GET http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk1Mjc0N30.ihOK4knDBup2v1wS5griUyRk_mHPweo6QSrViPjiQ5A
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk5MDc2NH0.-zNF2V3RIAk3KJVWNxEDpmk-UwmFqHmxbIPQYLqT9V8
 ###
 
 ### Add a task
 POST http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk1Mjc0N30.ihOK4knDBup2v1wS5griUyRk_mHPweo6QSrViPjiQ5A
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk5MDc2NH0.-zNF2V3RIAk3KJVWNxEDpmk-UwmFqHmxbIPQYLqT9V8
 Content-Type: application/json
 
 {
-    "description": "Task 3",
+    "description": "Task 1",
     "xpValue": 50
 }
 ###
 
 
+### Delete a task
+DELETE http://localhost:13000/api/tasks/11
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk5MDc2NH0.-zNF2V3RIAk3KJVWNxEDpmk-UwmFqHmxbIPQYLqT9V8
+###
+
+### Update task
+PATCH http://localhost:13000/api/tasks/12
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk5MDc2NH0.-zNF2V3RIAk3KJVWNxEDpmk-UwmFqHmxbIPQYLqT9V8
+Content-Type: application/json
+
+{
+    "xpValue": 200,
+    "completed": true,
+    "description": "Changed"
+}
+###

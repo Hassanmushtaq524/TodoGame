@@ -49,11 +49,10 @@ router.post("/", fetchuser, async (req, res) => {
         /**
          * Add the task
          */
-        const date = new Date();
-        const dateStr = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+        const date = new Date().toISOString();
         await pool.query(`INSERT INTO tasks (description, xp_value, created_by, created_at, updated_at, completed) 
                         VALUES ($1, $2, $3, $4, $5, $6)`, 
-                        [description, xpValue, user._id, dateStr, dateStr, false]);
+                        [description, xpValue, user._id, date, date, false]);
         return res.status(200).json({ success: true });
     } catch (error) {
         return res.status(500).json({ error });
@@ -63,13 +62,91 @@ router.post("/", fetchuser, async (req, res) => {
 /**
  * Delete task
  */
-// router.post("/", async (req, res) => {
-//     try {
+router.delete("/:id", fetchuser, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = req.user;
+
+        /**
+         * Retrieve the task with the id and check if the user is the same
+         */
+        const data = await pool.query(`SELECT * FROM tasks WHERE _id = $1`, [id]);
+        if (!data.rows.length) {
+            return res.status(404).json({ success: false, error: "Error while deleting task"});
+        }
+
+        const foundTask = data.rows[0];
+        if (foundTask.created_by != user._id) {
+            return res.status(404).json({ success: false, error: "Error while deleting task"});
+        }
+        /**
+         * Delete
+         */
+        await pool.query(`DELETE FROM tasks WHERE _id = $1 AND created_by = $2`, [id, user._id]);
+
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        return res.status(500).json({ error });
+    }
+})
+
+
+/**
+ * Update a task
+ */
+router.patch("/:id", fetchuser, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = req.user;
+        const { description, xpValue, completed } = req.body;
+
+        /**
+         * Verify
+         */
+        const data = await pool.query(`SELECT * FROM tasks WHERE _id = $1`, [id]);
+        if (!data.rows.length) {
+            return res.status(404).json({ success: false, error: "Error while updating task"});
+        }
+
+        const foundTask = data.rows[0];
+        if (foundTask.created_by != user._id) {
+            return res.status(404).json({ success: false, error: "Error while updating task"});
+        }
+
+        /**
+         * Update the task
+         */
+        const date = new Date().toISOString();
+
+        const updatedTask = {
+            _id: foundTask._id,
+            description: ((description)? description: foundTask.description),
+            xpValue: ((xpValue) ? xpValue : foundTask.xp_value),
+            createdAt: foundTask.created_at,
+            createdBy: user._id,
+            updatedAt: date,
+            completed: ((completed) ? completed: foundTask.completed)
+        };
+
+        await pool.query(`UPDATE tasks SET description = $1, 
+            xp_value = $2, 
+            created_at = $3, 
+            created_by = $4, 
+            updated_at = $5,
+            completed = $6
+            WHERE _id = $7`, [ updatedTask.description, 
+                updatedTask.xpValue,
+                updatedTask.createdAt,
+                updatedTask.createdBy,
+                updatedTask.updatedAt,
+                updatedTask.completed,
+                updatedTask._id ]);
         
-//     } catch (error) {
-//         res.status(500).json({ error });
-//     }
-// })
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        return res.status(500).json({ error });
+    }
+});
 
 
 module.exports = router;
