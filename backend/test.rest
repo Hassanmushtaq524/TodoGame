@@ -1,0 +1,77 @@
+###
+GET http://localhost:13000/api/
+###
+
+### USERS ENDPOINTS
+
+### for dev
+GET http://localhost:13000/api/users/
+###
+
+### signup
+POST http://localhost:13000/api/users/signup
+Content-Type: application/json
+
+{
+    "username": "hassan",
+    "email": "hassan@owu.edu",
+    "password": "Sufian135?"
+}
+###
+
+### login
+POST http://localhost:13000/api/users/login
+Content-Type: application/json
+
+{
+    "username": "hassan",
+    "password": "Sufian135?"
+}
+
+### Update level
+PATCH http://localhost:13000/api/users/
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+Content-Type: application/json
+
+{
+    "xpGained": 100
+}
+
+### TASKS ENDPOINTS
+
+### for dev
+GET http://localhost:13000/api/tasks/all
+###
+
+### Fetch all tasks
+GET http://localhost:13000/api/tasks/
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+###
+
+### Add a task
+POST http://localhost:13000/api/tasks/
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+Content-Type: application/json
+
+{
+    "description": "Task 1",
+    "xpValue": 50
+}
+###
+
+### Delete a task
+DELETE http://localhost:13000/api/tasks/2
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+###
+
+### Update task
+PATCH http://localhost:13000/api/tasks/2
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+Content-Type: application/json
+
+{
+    "xpValue": 200,
+    "completed": true,
+    "description": "Changed"
+}
+###
