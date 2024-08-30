@@ -16,9 +16,6 @@ const PORT = 3000;
  */
 app.get('/api/', async (req, res) => {
     try {
-        // await pool.query(`DROP TABLE users`);
-        // await pool.query(`DROP TABLE tasks`);
-        // await pool.query(`DROP TABLE levels`);
         await pool.query(`CREATE TABLE IF NOT EXISTS users 
             (_id SERIAL PRIMARY KEY, 
             username VARCHAR(100), 
@@ -37,13 +34,6 @@ app.get('/api/', async (req, res) => {
             created_at DATE,
             updated_at DATE,
             completed BOOLEAN)`);
-        
-        await pool.query(`CREATE TABLE IF NOT EXISTS levels 
-            (_id SERIAL PRIMARY KEY,
-            level_number INTEGER,
-            xp_threshold INTEGER,
-            created_at DATE,
-            updated_at DATE)`);
 
         return res.status(200).json({ success: true });
     } catch (error) {
@@ -56,7 +46,7 @@ app.get('/api/', async (req, res) => {
 /**
  * Routes
  */ 
-app.use("/api/auth", require("./routes/auth"));
+app.use("/api/users", require("./routes/users"));
 app.use("/api/tasks", require("./routes/tasks"));
 // app.use("/api/levels", require("./routes/levels"));
 

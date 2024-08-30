@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const pool = require('../db');
-const { body, validationResult } = require('express-validator');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const fetchuser = require("../middleware/fetchuser");
+const getLevel = require("../helpers/getLevel");
 const jwtSecret = "bradley";
+
 
 
 // TODO: Only for development
@@ -13,7 +15,7 @@ router.get("/", async (req, res) => {
         let data = await pool.query("SELECT * FROM users");
         return res.status(200).json({ success: true, data: data.rows });
     } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -50,7 +52,7 @@ router.post("/login", async (req, res) => {
 
         return res.status(200).json({ success: true, token: jwtToken, user: user });
     } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -76,7 +78,7 @@ router.post("/signup", async (req, res) => {
         
         const date = new Date().toISOString();
         await pool.query(`INSERT INTO users (username, email, password, level, total_xp, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-                                [username, email, secPass, 0, 0, date, dateStr]);
+                                [username, email, secPass, 0, 0, date, date]);
         
         
         users = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
@@ -90,7 +92,37 @@ router.post("/signup", async (req, res) => {
 
         return res.status(200).json({ success: true, token: jwtToken, user: user });
     } catch (error) {
-        res.status(500).json({ error });
+        res.status(500).json({ error: "Internal server error" });
+    }
+})
+
+
+// TODO: Test
+/**
+ * Updating user's xp and level
+ * 
+ * Auth: required
+ */
+router.patch("/", fetchuser, async (req, res) => {
+    try {
+        /**
+         * Get user data
+         */
+        let user = req.user;
+        const { xpGained } = req.body;
+        data = await pool.query(`SELECT * FROM users WHERE _id = $1`, [user._id]);
+        user = data.rows[0];
+
+        /**
+         * Get new level and update it
+         */
+        const newLevel = getLevel(user.level, user.total_xp, ((xpGained) ? xpGained : 0));
+        const newTotalXp = user.total_xp + ((xpGained) ? xpGained : 0);
+        await pool.query(`UPDATE users SET level = $1, total_xp = $2 WHERE _id = $3`, [newLevel, newTotalXp, user._id]);
+
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        res.status(500).json({ error: "Internal server error" });
     }
 })
 

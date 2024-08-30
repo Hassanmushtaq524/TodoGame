@@ -2,34 +2,42 @@
 GET http://localhost:13000/api/
 ###
 
-### AUTH ENDPOINTS
+### USERS ENDPOINTS
 
 ### for dev
-GET http://localhost:13000/api/auth/
+GET http://localhost:13000/api/users/
 ###
 
 ### signup
-POST http://localhost:13000/api/auth/signup
+POST http://localhost:13000/api/users/signup
 Content-Type: application/json
 
 {
-    "username": "hassanmushtak",
-    "email": "hassanmushtaq67@gmail.com",
+    "username": "hassan",
+    "email": "hassan@owu.edu",
     "password": "Sufian135?"
 }
 ###
 
 ### login
-POST http://localhost:13000/api/auth/login
+POST http://localhost:13000/api/users/login
 Content-Type: application/json
 
 {
-    "username": "hhmushtaq",
+    "username": "hassan",
     "password": "Sufian135?"
 }
 
-### TASKS ENDPOINTS
+### Update level
+PATCH http://localhost:13000/api/users/
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+Content-Type: application/json
 
+{
+    "xpGained": 100
+}
+
+### TASKS ENDPOINTS
 
 ### for dev
 GET http://localhost:13000/api/tasks/all
@@ -37,12 +45,12 @@ GET http://localhost:13000/api/tasks/all
 
 ### Fetch all tasks
 GET http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk5MDc2NH0.-zNF2V3RIAk3KJVWNxEDpmk-UwmFqHmxbIPQYLqT9V8
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
 ###
 
 ### Add a task
 POST http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk5MDc2NH0.-zNF2V3RIAk3KJVWNxEDpmk-UwmFqHmxbIPQYLqT9V8
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
 Content-Type: application/json
 
 {
@@ -51,15 +59,14 @@ Content-Type: application/json
 }
 ###
 
-
 ### Delete a task
-DELETE http://localhost:13000/api/tasks/11
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk5MDc2NH0.-zNF2V3RIAk3KJVWNxEDpmk-UwmFqHmxbIPQYLqT9V8
+DELETE http://localhost:13000/api/tasks/2
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
 ###
 
 ### Update task
-PATCH http://localhost:13000/api/tasks/12
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNDk5MDc2NH0.-zNF2V3RIAk3KJVWNxEDpmk-UwmFqHmxbIPQYLqT9V8
+PATCH http://localhost:13000/api/tasks/2
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
 Content-Type: application/json
 
 {

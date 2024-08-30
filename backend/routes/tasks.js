@@ -14,7 +14,7 @@ router.get("/all", async (req, res) => {
         let data = await pool.query("SELECT * FROM tasks");
         return res.status(200).json({ success: true, data: data.rows });
     } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -32,7 +32,7 @@ router.get("/", fetchuser, async (req, res) => {
         const data = await pool.query(`SELECT * FROM tasks WHERE created_by = $1`, [user._id]);
         return res.status(200).json({ success: true, data: data.rows});
     } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -55,7 +55,7 @@ router.post("/", fetchuser, async (req, res) => {
                         [description, xpValue, user._id, date, date, false]);
         return res.status(200).json({ success: true });
     } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -86,7 +86,7 @@ router.delete("/:id", fetchuser, async (req, res) => {
 
         return res.status(200).json({ success: true });
     } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(500).json({ error: "Internal server error" });
     }
 })
 
@@ -144,7 +144,7 @@ router.patch("/:id", fetchuser, async (req, res) => {
         
         return res.status(200).json({ success: true });
     } catch (error) {
-        return res.status(500).json({ error });
+        return res.status(500).json({ error: "Internal server error" });
     }
 });
 
