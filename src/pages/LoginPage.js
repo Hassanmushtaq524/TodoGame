@@ -9,14 +9,14 @@ import { useAuth } from '../context/AuthContext';
  * The login page
  */
 function LoginPage() {
-  const { user } = useAuth();
+  const { auth } = useAuth();
   const navigate = useNavigate();
   
   /**
    * Go to home if user already authenticated
    */
   useEffect(() => {
-    if (user) {
+    if (auth) {
       navigate("/");
     }
   }, [])

@@ -11,7 +11,7 @@ export default function AuthProvider({children}) {
      * Make the state persist after refresh
      */
     useEffect(() => {
-        if (localStorage.getItem("token")) {
+        if (localStorage.getItem("token") && localStorage.getItem("user")) {
             setAuth(true);
             setUser(JSON.parse(localStorage.getItem("user")));
         } else {
@@ -21,9 +21,44 @@ export default function AuthProvider({children}) {
     }, [])
 
     
-    const signupUser = (userInfo) => {
-        // TODO: implement
-        // We send the info (email, username, password) to /api/users/signup
+    /**
+     * Signs up the user
+     * 
+     * @param {Object} userInfo The user info 
+     * @returns true if successful, false otherwise
+     */
+    const signupUser = async (userInfo) => {
+        const url = process.env.REACT_APP_API_URL + "/api/users/signup";
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(userInfo)
+            });
+    
+            /**
+             * Get the response and save user, auth status, and auth token
+             */
+            if (!response.ok) {
+                setUser({});
+                setAuth(false);
+                return false;
+            }
+            
+            const data = await response.json();
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            setUser(data.user);
+            setAuth(true);
+
+            return true;
+        } catch (error) {
+            setAuth(false);
+            setUser({});
+            return false;
+        }
     }
 
 
@@ -68,6 +103,22 @@ export default function AuthProvider({children}) {
         }
     }
 
+    /**
+     * Logs out the user
+     * 
+     * @returns true if successful, false otherwise
+     */
+    const logoutUser = () => {
+        try {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            setAuth(false);
+            setUser({});
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
 
 
     const updateUserLevel = (xpGained) => {
@@ -76,7 +127,7 @@ export default function AuthProvider({children}) {
     }
 
     return (
-        <AuthContext.Provider value={ { user, auth, loginUser, signupUser, updateUserLevel }}>
+        <AuthContext.Provider value={ { user, auth, loginUser, signupUser, logoutUser, updateUserLevel }}>
             { children }
         </AuthContext.Provider>
     )

@@ -44,11 +44,20 @@ function Login() {
     }
   }
 
+  /**
+   * Do not submit the form and go to signup page 
+   */
+  const handleClickSignup = (e) => {
+    e.preventDefault();
+    navigate('/signup');
+  }
+
+  
   return (
     <form ref={loginRef} className={styles.loginForm} onSubmit={handleSubmit}>
         <h1>LOGIN</h1>
         <div className={styles.formInput}>
-            <label htmlFor="username">Email</label>
+            <label htmlFor="username">Username</label>
             <input type="username" name="username" placeholder="Enter Username" />
         </div>
         <div className={styles.formInput}>
@@ -56,7 +65,8 @@ function Login() {
             <input type="password" name="password" placeholder="Enter Password" />
         </div>
         { error && <p style={{color: 'red'}}>Incorrect email/password</p>}
-        <button className={styles.submitButton}>LOGIN</button>
+        <button className="primary-button">LOGIN</button>
+        <button className="secondary-button" onClick={handleClickSignup}>SIGNUP</button>
     </form>
   )
 }
