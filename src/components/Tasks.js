@@ -6,11 +6,9 @@ import { useTasks } from '../context/TaskContext';
 
 const Tasks = () => {
     const { user, auth } = useAuth();
-    const { taskList, fetchTasks } = useTasks();
+    const { taskList } = useTasks();
 
     useEffect(() => {
-        fetchTasks();
-        console.log(taskList);
     }, [])
 
     return (

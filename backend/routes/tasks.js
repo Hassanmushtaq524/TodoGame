@@ -1,12 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const pool = require('../db');
-const { body, validationResult } = require('express-validator');
 const fetchuser = require('../middleware/fetchuser');
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const jwtSecret = "bradley";
-
 
 // TODO: Only for development
 router.get("/all", async (req, res) => {

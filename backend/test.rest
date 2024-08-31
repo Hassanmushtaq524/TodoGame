@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ### Update level
 PATCH http://localhost:13000/api/users/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
 Content-Type: application/json
 
 {
@@ -45,12 +45,12 @@ GET http://localhost:13000/api/tasks/all
 
 ### Fetch all tasks
 GET http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
 ###
 
 ### Add a task
 POST http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
 Content-Type: application/json
 
 {
@@ -60,13 +60,13 @@ Content-Type: application/json
 ###
 
 ### Delete a task
-DELETE http://localhost:13000/api/tasks/2
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+DELETE http://localhost:13000/api/tasks/4
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
 ###
 
 ### Update task
-PATCH http://localhost:13000/api/tasks/2
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MDU0NH0.-96f1qFPXsoUMwbZXB1PA_MPIsEPLCTLVUuZzzR8Q14
+PATCH http://localhost:13000/api/tasks/5
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
 Content-Type: application/json
 
 {

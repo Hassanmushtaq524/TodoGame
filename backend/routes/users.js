@@ -5,8 +5,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetchuser = require("../middleware/fetchuser");
 const getLevel = require("../helpers/getLevel");
-const jwtSecret = "bradley";
-
 
 
 // TODO: Only for development
@@ -48,7 +46,7 @@ router.post("/login", async (req, res) => {
             }
         }
 
-        const jwtToken = jwt.sign(signData, jwtSecret);
+        const jwtToken = jwt.sign(signData, process.env.JWT_SECRET);
 
         return res.status(200).json({ success: true, token: jwtToken, user: user });
     } catch (error) {
@@ -88,7 +86,7 @@ router.post("/signup", async (req, res) => {
                 _id: user._id
             }
         }
-        const jwtToken = jwt.sign(signData, jwtSecret);
+        const jwtToken = jwt.sign(signData, process.env.JWT_SECRET);
 
         return res.status(200).json({ success: true, token: jwtToken, user: user });
     } catch (error) {
