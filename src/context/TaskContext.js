@@ -8,24 +8,46 @@ export const TaskContext = createContext(null);
 export default function TaskProvider({children}) {
     const [taskList, setTaskList] = useState([]);
 
-    // TODO: Review 
-    useEffect(() => {
-        if (localStorage.getItem("user")) {
-            fetchTasks()
-        }
-    }, [])
+    /**
+     * Fetches the tasks for the current authenticated user
+     * 
+     * @returns true if successful, false otherwise
+     */
+    const fetchTasks = async () => {
+        const url = process.env.REACT_APP_API_URL + '/api/tasks/';
+        try {
+            /**
+             * Get the data from backend and update task list
+             */
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": localStorage.getItem('token')
+                }
+            })
 
-    const fetchTasks = () => {
-        // TODO: implement
+            if (!response.ok) { 
+                setTaskList([]);
+                return false;
+            }
+
+            const data = response.json();
+            setTaskList(data.data);
+            return true;
+        } catch (error) {
+            setTaskList([]);
+            return false;
+        }
     }
 
-    const updateTask = (changedTask) => {
-        // TODO: implement
+    const addTask = () => {
+        
     }
 
 
     return (
-        <TaskContext.Provider value={ { taskList }}>
+        <TaskContext.Provider value={ { taskList, fetchTasks }}>
             { children }
         </TaskContext.Provider>
     )

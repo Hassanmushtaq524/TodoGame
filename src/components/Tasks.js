@@ -5,10 +5,14 @@ import Task from './Task';
 import { useTasks } from '../context/TaskContext';
 
 const Tasks = () => {
-    const { user, auth } = useAuth();
-    const { taskList } = useTasks();
+    const { auth } = useAuth();
+    const { taskList, fetchTasks } = useTasks();
 
     useEffect(() => {
+        if (auth) {
+            fetchTasks();
+            console.log(taskList);
+        }
     }, [])
 
     return (
@@ -16,9 +20,12 @@ const Tasks = () => {
         <div id="daily-tasks">
             <h1>Daily Tasks</h1>
             <div className="task-list">
-                {taskList.map((task) => {
-                    return <Task key={task._id} _id={task._id} description={task.description} xpValue={task.xpValue} completed={task.completed}/>
-                })}
+                {(taskList) ? 
+                    taskList.map((task) => {
+                        return <Task key={task._id} _id={task._id} description={task.description} xpValue={task.xpValue} completed={task.completed}/>
+                    }) 
+                    :
+                    <p>No tasks today...</p>}
             </div>
         </div>
         </>
