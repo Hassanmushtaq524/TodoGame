@@ -56,8 +56,8 @@ function Signup() {
                 <input type="password" name="password" placeholder="Enter Password" />
             </div>
             { error && <p style={{color: 'red'}}>Signing up not successful</p>}
-            <button className="primary-button" onClick={handleSubmit}>SIGNUP</button>
-            <button className="secondary-button" onClick={handleClickLogin}>LOGIN</button>
+            <button className="primary-button" onClick={handleSubmit}><b>SIGNUP</b></button>
+            <button className="secondary-button" onClick={handleClickLogin}><b>LOGIN</b></button>
         </form>
     )
 }

@@ -1,7 +1,11 @@
 #daily-tasks {
-    margin: 60px;
     padding: 60px;
-    width: 50%;
+    width: 40%;
     border: 1px solid var(--primary-color);
     border-radius: 16px;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
 }

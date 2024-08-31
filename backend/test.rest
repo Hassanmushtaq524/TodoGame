@@ -24,13 +24,13 @@ POST http://localhost:13000/api/users/login
 Content-Type: application/json
 
 {
-    "username": "hassan",
+    "username": "hhmushtaq",
     "password": "Sufian135?"
 }
 
 ### Update level
 PATCH http://localhost:13000/api/users/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
 Content-Type: application/json
 
 {
@@ -45,28 +45,28 @@ GET http://localhost:13000/api/tasks/all
 
 ### Fetch all tasks
 GET http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
 ###
 
 ### Add a task
 POST http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
 Content-Type: application/json
 
 {
-    "description": "Task 1",
+    "description": "Task 2",
     "xpValue": 50
 }
 ###
 
 ### Delete a task
 DELETE http://localhost:13000/api/tasks/4
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
 ###
 
 ### Update task
 PATCH http://localhost:13000/api/tasks/5
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6Mn0sImlhdCI6MTcyNTA1MzkyOH0.c_3HAnGQuw7jUp_mDGUp76il-fbf_zjRqxW063EKArw
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
 Content-Type: application/json
 
 {

@@ -32,7 +32,7 @@ export default function TaskProvider({children}) {
                 return false;
             }
 
-            const data = response.json();
+            const data = await response.json();
             setTaskList(data.data);
             return true;
         } catch (error) {
@@ -41,13 +41,48 @@ export default function TaskProvider({children}) {
         }
     }
 
-    const addTask = () => {
-        
+
+    /**
+     * Adds a new task to the task list
+     * 
+     * @param {Object} newTask The task to add 
+     * @returns true if successful, false otherwise
+     */
+    const addTask = async (newTask) => {
+        const url = process.env.REACT_APP_API_URL + '/api/tasks/';
+        try {
+            /**
+             * Get the data from backend and update task list
+             */
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": localStorage.getItem("token")
+                },
+                body: JSON.stringify(newTask)
+            })
+
+            if (!response.ok) { 
+                return false;
+            }
+            
+            const success = await fetchTasks();
+            
+            if (!success) {
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            setTaskList([]);
+            return false;
+        }
     }
 
 
     return (
-        <TaskContext.Provider value={ { taskList, fetchTasks }}>
+        <TaskContext.Provider value={ { taskList, fetchTasks, addTask }}>
             { children }
         </TaskContext.Provider>
     )

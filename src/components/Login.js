@@ -52,21 +52,21 @@ function Login() {
     navigate('/signup');
   }
 
-  
+
   return (
-    <form ref={loginRef} className={styles.loginForm} onSubmit={handleSubmit}>
+    <form ref={loginRef} onSubmit={handleSubmit}>
         <h1>LOGIN</h1>
-        <div className={styles.formInput}>
+        <div>
             <label htmlFor="username">Username</label>
             <input type="username" name="username" placeholder="Enter Username" />
         </div>
-        <div className={styles.formInput}>
+        <div>
             <label htmlFor="password">Password</label>
             <input type="password" name="password" placeholder="Enter Password" />
         </div>
         { error && <p style={{color: 'red'}}>Incorrect email/password</p>}
-        <button className="primary-button">LOGIN</button>
-        <button className="secondary-button" onClick={handleClickSignup}>SIGNUP</button>
+        <button className="primary-button"><b>LOGIN</b></button>
+        <button className="secondary-button" onClick={handleClickSignup}><b>SIGNUP</b></button>
     </form>
   )
 }

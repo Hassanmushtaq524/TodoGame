@@ -1,11 +1,10 @@
 import React from 'react';
 import './Task.css';
-import { useTasks } from '../context/TaskContext';
-import { useAuth } from '../context/AuthContext';
+
 
 const Task = (props) => {
     const { description, xpValue, completed } = props;
-    
+
     const checkClicked = () => {
         console.log("clicked");
     }
@@ -13,7 +12,7 @@ const Task = (props) => {
     return (
         <>
         <div id="task">
-            <input type="checkbox" checked={completed} onClick={() => {checkClicked()}}/>
+            <input type="checkbox" onClick={() => {checkClicked()}}/>
             <h3>{description}</h3>
             <h3>{xpValue}</h3>
         </div>

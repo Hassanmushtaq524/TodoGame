@@ -11,7 +11,6 @@ const Tasks = () => {
     useEffect(() => {
         if (auth) {
             fetchTasks();
-            console.log(taskList);
         }
     }, [])
 
@@ -19,10 +18,15 @@ const Tasks = () => {
         <>
         <div id="daily-tasks">
             <h1>Daily Tasks</h1>
+            <div className="heading">
+                <p>Completed</p>
+                <p>Description</p>
+                <p>XP</p>
+            </div>
             <div className="task-list">
                 {(taskList) ? 
                     taskList.map((task) => {
-                        return <Task key={task._id} _id={task._id} description={task.description} xpValue={task.xpValue} completed={task.completed}/>
+                        return <Task key={task._id} _id={task._id} description={task.description} xpValue={task.xp_value} completed={task.completed}/>
                     }) 
                     :
                     <p>No tasks today...</p>}
