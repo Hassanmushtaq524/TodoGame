@@ -19,9 +19,15 @@ function AddTask() {
             setError(true);
             return;
         }
+
+        if (taskRef.current.xpValue.value < 0) {
+            setError(true);
+            return;
+        }
+
         const newTask = {
             description: taskRef.current.description.value,
-            xpValue: taskRef.current.xpValue.value
+            xpValue: Math.round(taskRef.current.xpValue.value)
         }
 
         const success = await addTask(newTask);

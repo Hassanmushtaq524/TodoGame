@@ -19,7 +19,7 @@ const Tasks = () => {
         <div className={styles.tasksBox}>
             <h1>Tasks</h1>
             <div className={styles.tasksList}>
-                {(taskList) ? 
+                {(taskList.length) ? 
                     taskList.map((task) => {
                         return <Task key={task._id} _id={task._id} description={task.description} xpValue={task.xp_value} />
                     }) 
