@@ -62,7 +62,6 @@ export default function AuthProvider({children}) {
     }
 
 
-
     /**
      * Logs in the user
      * 
@@ -103,6 +102,7 @@ export default function AuthProvider({children}) {
         }
     }
 
+
     /**
      * Logs out the user
      * 
@@ -120,11 +120,41 @@ export default function AuthProvider({children}) {
         }
     }
 
-
-    const updateUserLevel = (xpGained) => {
-        // TODO: implement
+    /**
+     * Update user XP and Level
+     * 
+     * @param {Number} xpGained The xp user gained
+     * @returns true if successful, false otherwise 
+     */
+    const updateUserLevel = async (xpGained) => {
         // We send a PATCH request to /api/users/ with (xpGained)
+        const url = process.env.REACT_APP_API_URL + "/api/users/"
+        try {
+            const response = await fetch(url, {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": localStorage.getItem("token")
+                },
+                body: JSON.stringify({ xpGained: xpGained })
+            });
+
+            if (!response.ok) {
+                return false;
+            }
+
+            /**
+             * Update stored user
+             */
+            const data = await response.json();
+            localStorage.setItem("user", JSON.stringify(data.user));
+            setUser(data.user);
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
+
 
     return (
         <AuthContext.Provider value={ { user, auth, loginUser, signupUser, logoutUser, updateUserLevel }}>

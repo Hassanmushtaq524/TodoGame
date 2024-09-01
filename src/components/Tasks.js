@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './Tasks.css';
+import styles from './Tasks.module.css';
 import { useAuth } from '../context/AuthContext';
 import Task from './Task';
 import { useTasks } from '../context/TaskContext';
@@ -16,17 +16,12 @@ const Tasks = () => {
 
     return (
         <>
-        <div id="daily-tasks">
-            <h1>Daily Tasks</h1>
-            <div className="heading">
-                <p>Completed</p>
-                <p>Description</p>
-                <p>XP</p>
-            </div>
-            <div className="task-list">
+        <div className={styles.tasksBox}>
+            <h1>Tasks</h1>
+            <div className={styles.tasksList}>
                 {(taskList) ? 
                     taskList.map((task) => {
-                        return <Task key={task._id} _id={task._id} description={task.description} xpValue={task.xp_value} completed={task.completed}/>
+                        return <Task key={task._id} _id={task._id} description={task.description} xpValue={task.xp_value} />
                     }) 
                     :
                     <p>No tasks today...</p>}

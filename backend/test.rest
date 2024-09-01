@@ -4,8 +4,9 @@ GET http://localhost:13000/api/
 
 ### USERS ENDPOINTS
 
-### for dev
+###  fetch the logged in user
 GET http://localhost:13000/api/users/
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTIxNzk5MH0.QgJL0jGKfKxnf2HRI5UuxELSg6KO2GJ5n3JmCuwJlGA
 ###
 
 ### signup
@@ -30,11 +31,11 @@ Content-Type: application/json
 
 ### Update level
 PATCH http://localhost:13000/api/users/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTIxODU2MX0._dLs2zg8CU5KHybvIYBnTIx-KBkJo0BjnkWJltIFxGI
 Content-Type: application/json
 
 {
-    "xpGained": 100
+    "xpGained": 50
 }
 
 ### TASKS ENDPOINTS
@@ -45,12 +46,12 @@ GET http://localhost:13000/api/tasks/all
 
 ### Fetch all tasks
 GET http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTIxODU2MX0._dLs2zg8CU5KHybvIYBnTIx-KBkJo0BjnkWJltIFxGI
 ###
 
 ### Add a task
 POST http://localhost:13000/api/tasks/
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTIxODU2MX0._dLs2zg8CU5KHybvIYBnTIx-KBkJo0BjnkWJltIFxGI
 Content-Type: application/json
 
 {
@@ -60,13 +61,13 @@ Content-Type: application/json
 ###
 
 ### Delete a task
-DELETE http://localhost:13000/api/tasks/4
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
+DELETE http://localhost:13000/api/tasks/6
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTIxODU2MX0._dLs2zg8CU5KHybvIYBnTIx-KBkJo0BjnkWJltIFxGI
 ###
 
 ### Update task
-PATCH http://localhost:13000/api/tasks/5
-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTEzNjQ4MH0.jQYegBJ0XqErzM1zhszmXQmvoYAL89RZTjVt6L2c-nE
+PATCH http://localhost:13000/api/tasks/12
+auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTIxODU2MX0._dLs2zg8CU5KHybvIYBnTIx-KBkJo0BjnkWJltIFxGI
 Content-Type: application/json
 
 {

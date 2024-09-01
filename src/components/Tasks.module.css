@@ -1,11 +1,13 @@
-#daily-tasks {
+.tasksBox {
     padding: 60px;
     width: 40%;
     border: 1px solid var(--primary-color);
     border-radius: 16px;
+    color: var(--primary-color);
 }
 
-.heading {
+.tasksList {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 26px;
 }

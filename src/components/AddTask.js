@@ -9,22 +9,28 @@ function AddTask() {
     const { addTask } = useTasks();
 
 
-    const handleSubmit = (e) => {
+    /**
+     * Add the task and set errors if needed
+     */
+    const handleSubmit = async (e) => {
         e.preventDefault();
         
         if (!taskRef.current.description.value || !taskRef.current.xpValue.value) {
             setError(true);
+            return;
         }
         const newTask = {
             description: taskRef.current.description.value,
             xpValue: taskRef.current.xpValue.value
         }
 
-        const success = addTask(newTask);
+        const success = await addTask(newTask);
         if (!success) {
             setError(true);
         } else {
             setError(false);
+            taskRef.current.description.value = '';
+            taskRef.current.xpValue.value = '';
         }
     }
 
@@ -39,7 +45,7 @@ function AddTask() {
                 <label>XP Value</label>
                 <input type="text" name="xpValue" placeholder="Enter XP Value"/>
             </div>
-            { error && <p style={{color: 'red'}}>Incorrect Task</p>}
+            { error && <p style={{color: 'red'}}>Invalid Task</p>}
             <button className="primary-button"><b>Add Task</b></button>
         </form>
         </>

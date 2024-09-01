@@ -7,11 +7,23 @@ const fetchuser = require("../middleware/fetchuser");
 const getLevel = require("../helpers/getLevel");
 
 
-// TODO: Only for development
-router.get("/", async (req, res) => {
+/**
+ * TODO: see if u need this
+ */
+router.get("/", fetchuser, async (req, res) => {
     try {
-        let data = await pool.query("SELECT * FROM users");
-        return res.status(200).json({ success: true, data: data.rows });
+        const user = req.user;
+
+        /**
+         * Match the user id in the database and return user data
+         */
+        let data = await pool.query("SELECT * FROM users WHERE _id = $1", [user._id]);
+        if (!data.rows.length) {
+            return res.status(404).json({ success: false });
+        }
+
+        delete data.rows[0].password;
+        return res.status(200).json({ success: true, user: data.rows[0] });
     } catch (error) {
         return res.status(500).json({ error: "Internal server error" });
     }
@@ -48,6 +60,7 @@ router.post("/login", async (req, res) => {
 
         const jwtToken = jwt.sign(signData, process.env.JWT_SECRET);
 
+        delete user.password;
         return res.status(200).json({ success: true, token: jwtToken, user: user });
     } catch (error) {
         return res.status(500).json({ error: "Internal server error" });
@@ -88,6 +101,7 @@ router.post("/signup", async (req, res) => {
         }
         const jwtToken = jwt.sign(signData, process.env.JWT_SECRET);
 
+        delete user.password;
         return res.status(200).json({ success: true, token: jwtToken, user: user });
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
@@ -108,7 +122,10 @@ router.patch("/", fetchuser, async (req, res) => {
          */
         let user = req.user;
         const { xpGained } = req.body;
-        data = await pool.query(`SELECT * FROM users WHERE _id = $1`, [user._id]);
+        let data = await pool.query(`SELECT * FROM users WHERE _id = $1`, [user._id]);
+        if (!data.rows.length) {
+            return res.status(404).json({ success: false });
+        }
         user = data.rows[0];
 
         /**
@@ -118,7 +135,17 @@ router.patch("/", fetchuser, async (req, res) => {
         const newTotalXp = user.total_xp + ((xpGained) ? xpGained : 0);
         await pool.query(`UPDATE users SET level = $1, total_xp = $2 WHERE _id = $3`, [newLevel, newTotalXp, user._id]);
 
-        return res.status(200).json({ success: true });
+        /**
+         * Get updated user
+         */
+        data = await pool.query(`SELECT * FROM users WHERE _id = $1`, [user._id]);
+        if (!data.rows.length) {
+            return res.status(404).json({ success: false });
+        }
+        user = data.rows[0];
+
+        delete user.password;
+        return res.status(200).json({ success: true, user: user });
     } catch (error) {
         res.status(500).json({ error: "Internal server error" });
     }
