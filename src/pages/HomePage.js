@@ -4,7 +4,7 @@ import Tasks from '../components/Tasks';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import AddTask from '../components/AddTask';
-
+import styles from './HomePage.module.css';
 
 /**
  * The home page
@@ -25,12 +25,7 @@ function HomePage () {
   return (
     <>
     <Header/>
-    <div style={{
-      display: 'flex',
-      alignItems: 'start',
-      justifyContent: 'space-between',
-      padding: '60px'
-    }}>
+    <div className={styles.bottomContainer}>
       <Tasks/>
       <AddTask/>
     </div>

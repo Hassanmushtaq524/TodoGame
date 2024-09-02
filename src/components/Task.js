@@ -70,9 +70,9 @@ const Task = (props) => {
     return (
         <>
         <div className={styles.taskBox} >
-            <input type="checkbox" name="cb" id="checkbox" onClick={handleClicked} />
+            <h5 className={styles.completedBox} onClick={handleClicked}>Mark Completed</h5>
             <h3>{description}</h3>
-            <p>{xpValue}</p>
+            <p>{xpValue} <b>XP</b></p>
             { error && <p style={{ color: 'red'}}>Some error occurred</p>}
         </div>
         </>

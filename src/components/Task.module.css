@@ -7,3 +7,14 @@
     border-radius: 50px;
 }
 
+
+.completedBox {
+    padding: 10px;
+    border: 2px solid rgb(99, 165, 0);
+    color: rgb(99, 165, 0);
+    border-radius: 12px;
+}
+
+.completedBox:hover {
+    cursor: pointer;
+}

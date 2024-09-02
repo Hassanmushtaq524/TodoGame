@@ -34,7 +34,7 @@ const Header = () => {
             <div className="right-container">
                 <h2>Level: {user.level}</h2>
                 <h2>XP: {user.total_xp}</h2>
-                <button onClick={handleLogout} className="secondary-button">LOGOUT</button>
+                <button onClick={handleLogout} className="secondary-button"><b>LOGOUT</b></button>
             </div>
         </div>
     )

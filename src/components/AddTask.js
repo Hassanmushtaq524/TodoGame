@@ -52,7 +52,7 @@ function AddTask() {
                 <input type="text" name="xpValue" placeholder="Enter XP Value"/>
             </div>
             { error && <p style={{color: 'red'}}>Invalid Task</p>}
-            <button className="primary-button"><b>Add Task</b></button>
+            <button className="primary-button"><b>ADD TASK</b></button>
         </form>
         </>
     )
