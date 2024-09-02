@@ -1,8 +1,17 @@
 #header { 
     background-color: var(--primary-color);
-    padding: 20px 60px;
+    padding: 60px;
     display: flex;
     color: white;
     align-items: center;
     justify-content: space-between;
+}
+
+
+.right-container {
+    width: 30%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 16px;
+    color: var(--primary-color);
 }
