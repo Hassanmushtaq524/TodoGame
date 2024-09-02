@@ -1,12 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const pool = require('../db');
-const { body, validationResult } = require('express-validator');
 const fetchuser = require('../middleware/fetchuser');
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const jwtSecret = "bradley";
-
 
 // TODO: Only for development
 router.get("/all", async (req, res) => {
@@ -29,7 +24,7 @@ router.get("/", fetchuser, async (req, res) => {
         /**
          * Get the tasks for the current authenticated user
          */
-        const data = await pool.query(`SELECT * FROM tasks WHERE created_by = $1`, [user._id]);
+        const data = await pool.query(`SELECT * FROM tasks WHERE created_by = $1 and completed = false`, [user._id]);
         return res.status(200).json({ success: true, data: data.rows});
     } catch (error) {
         return res.status(500).json({ error: "Internal server error" });

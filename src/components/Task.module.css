@@ -1,0 +1,9 @@
+.taskBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--primary-color);
+    padding: 20px 40px;
+    border-radius: 50px;
+}
+

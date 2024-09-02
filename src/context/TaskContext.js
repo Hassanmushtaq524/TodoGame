@@ -5,55 +5,114 @@ export const TaskContext = createContext(null);
 
 
 
-// TODO: remove emulating functions
-const _fetchTasks = () => {
-    return [
-        { _id: 1, description: "Task number 1", xpValue: 50, createdBy: 1, completed: false },
-        { _id: 2, description: "Task number 2", xpValue: 51, createdBy: 1, completed: false },
-        { _id: 3, description: "Task number 3", xpValue: 52, createdBy: 1, completed: false },
-        { _id: 4, description: "Task number 4", xpValue: 53, createdBy: 1, completed: false }
-    ];
-}
-
-const _updateTask = (changedTask, setTaskList, taskList) => {
-    for (let i = 0; i < taskList.length; i++) {
-        if (taskList[i]._id = changedTask._id) {
-            setTaskList([...taskList.slice(0, i), changedTask, ...taskList.slice(i + 1)]);
-            break;
-        }
-
-    }
-    console.log(taskList)
-}
-
-const _addTask = (newTask, setTaskList, taskList) => {
-    setTaskList([...taskList, newTask]);
-}
-
-
 export default function TaskProvider({children}) {
     const [taskList, setTaskList] = useState([]);
 
-    // TODO: Review 
-    useEffect(() => {
-        if (localStorage.getItem("user")) {
-            fetchTasks()
+    /**
+     * Fetches the tasks for the current authenticated user
+     * 
+     * @returns true if successful, false otherwise
+     */
+    const fetchTasks = async () => {
+        const url = process.env.REACT_APP_API_URL + '/api/tasks/';
+        try {
+            /**
+             * Get the data from backend and update task list
+             */
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": localStorage.getItem('token')
+                }
+            })
+
+            if (!response.ok) { 
+                setTaskList([]);
+                return false;
+            }
+
+            const data = await response.json();
+            setTaskList(data.data);
+            return true;
+        } catch (error) {
+            setTaskList([]);
+            return false;
         }
-    }, [])
-
-    const fetchTasks = () => {
-        // TODO: implement
-        setTaskList(_fetchTasks());
     }
 
-    const updateTask = (changedTask) => {
-        // TODO: implement
-        _updateTask(changedTask, setTaskList, taskList);
+
+    /**
+     * Adds a new task to the task list
+     * 
+     * @param {Object} newTask The task to add 
+     * @returns true if successful, false otherwise
+     */
+    const addTask = async (newTask) => {
+        const url = process.env.REACT_APP_API_URL + '/api/tasks/';
+        try {
+            /**
+             * Add the task and fetch it again
+             */
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": localStorage.getItem("token")
+                },
+                body: JSON.stringify(newTask)
+            })
+
+            if (!response.ok) { 
+                return false;
+            }
+
+            const success = await fetchTasks();
+            if (!success) {
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
 
+    /**
+     * 
+     * @param {Object} taskInfo The task info we are changing
+     * @param {Number} id The id of the task we are changing
+     * @returns true if successful, false otherwise
+     */
+    const updateTask = async (taskInfo, id) => {
+        const url = process.env.REACT_APP_API_URL + `/api/tasks/${id}`;
+        try {
+            const response = await fetch(url, {
+                method: "PATCH",
+                headers: {
+                    "Content-type": "application/json",
+                    "auth-token": localStorage.getItem("token")
+                },
+                body: JSON.stringify(taskInfo)
+            })
+
+            if (!response.ok) {
+                return false;
+            }
+
+            const success = await fetchTasks();
+            if (!success) {
+                return false;
+            }
+
+            return true;
+        } catch (error) {   
+            return false;
+        }
+    }
 
     return (
-        <TaskContext.Provider value={ { taskList, fetchTasks, updateTask }}>
+        <TaskContext.Provider value={ { taskList, fetchTasks, addTask, updateTask }}>
             { children }
         </TaskContext.Provider>
     )

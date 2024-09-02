@@ -1,0 +1,13 @@
+.tasksBox {
+    padding: 60px;
+    width: 40%;
+    border: 1px solid var(--primary-color);
+    border-radius: 16px;
+    color: var(--primary-color);
+}
+
+.tasksList {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}

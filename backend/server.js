@@ -1,14 +1,27 @@
+require('dotenv').config();
 const express = require('express');
 const pool = require('./db');
-
+const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Enable CORS for all routes
+app.use(cors());
+
+//  Configure CORS options
+const corsOptions = {
+    origin: process.env.FRONTEND_URL, // Allow only your frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'auth-token'],
+};
+
+app.use(cors(corsOptions));
+
 /**
  * Constants
  */
-const PORT = 3000;
+const PORT = Number(process.env.APP_PORT);
 
 
 /**

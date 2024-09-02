@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import './Tasks.css';
+import styles from './Tasks.module.css';
 import { useAuth } from '../context/AuthContext';
 import Task from './Task';
 import { useTasks } from '../context/TaskContext';
 
 const Tasks = () => {
-    const { user, auth } = useAuth();
+    const { auth } = useAuth();
     const { taskList, fetchTasks } = useTasks();
 
     useEffect(() => {
-        fetchTasks();
-        console.log(taskList);
+        if (auth) {
+            fetchTasks();
+        }
     }, [])
 
     return (
         <>
-        <div id="daily-tasks">
-            <h1>Daily Tasks</h1>
-            <div className="task-list">
-                {taskList.map((task) => {
-                    return <Task key={task._id} _id={task._id} description={task.description} xpValue={task.xpValue} completed={task.completed}/>
-                })}
+        <div className={styles.tasksBox}>
+            <h1>Tasks</h1>
+            <div className={styles.tasksList}>
+                {(taskList.length) ? 
+                    taskList.map((task) => {
+                        return <Task key={task._id} _id={task._id} description={task.description} xpValue={task.xp_value} />
+                    }) 
+                    :
+                    <p>No tasks today...</p>}
             </div>
         </div>
         </>

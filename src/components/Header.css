@@ -1,16 +1,8 @@
 #header { 
-    width: 100%;
-    padding: 60px;
     background-color: var(--primary-color);
+    padding: 20px 60px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: white;
-}
-
-.profile-pic {
-    border-radius: 100%;
-    width: 40%;
-    float: left;
-    margin-right: 40px;
+    align-items: center;
+    justify-content: space-between;
 }
