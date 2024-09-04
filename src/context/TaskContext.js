@@ -14,8 +14,8 @@ export default function TaskProvider({children}) {
      * @returns true if successful, false otherwise
      */
     const fetchTasks = async () => {
-        const url = process.env.REACT_APP_API_URL + '/api/tasks/';
         try {
+            const url = process.env.REACT_APP_API_URL + '/api/tasks/';
             /**
              * Get the data from backend and update task list
              */
@@ -49,8 +49,8 @@ export default function TaskProvider({children}) {
      * @returns true if successful, false otherwise
      */
     const addTask = async (newTask) => {
-        const url = process.env.REACT_APP_API_URL + '/api/tasks/';
         try {
+            const url = process.env.REACT_APP_API_URL + '/api/tasks/';
             /**
              * Add the task and fetch it again
              */
@@ -85,8 +85,8 @@ export default function TaskProvider({children}) {
      * @returns true if successful, false otherwise
      */
     const updateTask = async (taskInfo, id) => {
-        const url = process.env.REACT_APP_API_URL + `/api/tasks/${id}`;
         try {
+            const url = process.env.REACT_APP_API_URL + `/api/tasks/${id}`;
             const response = await fetch(url, {
                 method: "PATCH",
                 headers: {
@@ -111,8 +111,39 @@ export default function TaskProvider({children}) {
         }
     }
 
+    /**
+     * Deletes a task
+     * 
+     * @param {Number} id The id of the task to delete 
+     * @returns true if successful, false otherwise
+     */
+    const deleteTask = async (id) => {
+        try {     
+            const url = process.env.REACT_APP_API_URL + `/api/tasks/${id}`;
+            const response = await fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "auth-token": localStorage.getItem("token")
+                }
+            })
+
+            if (!response.ok) {
+                return false;
+            }
+
+            const success = await fetchTasks();
+            if (!success) {
+                return false;
+            }
+
+            return true;
+        } catch (error) {
+            return false;
+        }
+        
+    }
     return (
-        <TaskContext.Provider value={ { taskList, fetchTasks, addTask, updateTask }}>
+        <TaskContext.Provider value={ { taskList, fetchTasks, addTask, updateTask, deleteTask }}>
             { children }
         </TaskContext.Provider>
     )

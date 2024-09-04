@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from './Task.module.css';
 import { useAuth } from '../context/AuthContext';
 import { useTasks } from '../context/TaskContext';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
+import deleteIcon from "../assets/icons8-delete.svg";
 
 const Task = (props) => {
     /**
@@ -11,7 +12,7 @@ const Task = (props) => {
      */
     const { _id, description, xpValue } = props;
     const { updateUserLevel } = useAuth();
-    const { updateTask } = useTasks();
+    const { updateTask, deleteTask } = useTasks();
     const [error, setError] = useState(false);
 
 
@@ -27,6 +28,7 @@ const Task = (props) => {
         let success = await updateUserLevel(xpValue);
         if (!success) {
             setError(true);
+            return;
         } 
 
         /**
@@ -35,6 +37,7 @@ const Task = (props) => {
         success = await updateTask({ completed: true }, _id);
         if (!success) {
             setError(true);
+            return;
         }
     }
 
@@ -67,12 +70,52 @@ const Task = (props) => {
         
     }
 
+    const handleDeleteConfirm = async () => {  
+        /**
+         * Delete the task and check for success
+         */
+        const success = await deleteTask(_id);
+        if (!success) {
+            setError(true);
+        }
+        
+        setError(false);
+    }
+
+
+    const handleDeleteClick = (e) => {
+        e.preventDefault()
+
+        confirmAlert({
+            title: 'Please Confirm',
+            message: 'Are you sure you want to delete this task?',
+            buttons: [
+            {
+                label: 'Yes',
+                onClick: async () => {
+                    await handleDeleteConfirm();
+                }
+            },
+            {
+                label: 'No',
+                onClick: () => {
+                    return;
+                }
+            }
+            ],
+            closeOnEscape: true,
+            closeOnClickOutside: true
+        });
+
+    }
+
     return (
         <>
         <div className={styles.taskBox} >
             <h5 className={styles.completedBox} onClick={handleClicked}>Mark Completed</h5>
             <h3>{description}</h3>
             <p>{xpValue} <b>XP</b></p>
+            <img src={deleteIcon} onClick={handleDeleteClick}/>
             { error && <p style={{ color: 'red'}}>Some error occurred</p>}
         </div>
         </>
