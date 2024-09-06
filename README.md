@@ -2,6 +2,8 @@
 
 A game where you level up as you complete your daily tasks! The purpose is to combat procrastrination and encourage the user to be more proactive. 
 
+[![Used](https://skillicons.dev/icons?i=react,nodejs,expressjs,postgres,docker,html,css)](https://skillicons.dev)
+
 ## About the project
 
 The project implements 3 pages: Login, Signup, and Home page. Every user has to sign up to be able to play the game.
