@@ -1,16 +1,6 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:13
-    container_name: todo-game-db
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: todo-game-db
-    volumes:
-      - todo-game-db-data:/var/lib/postgresql/data
-
   frontend:
     build:
       context: ./frontend
@@ -23,11 +13,9 @@ services:
       context: ./backend
     container_name: todo-game-backend
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/todo-game-db
+      - DATABASE_URL=postgresql://todo_game_db_600r_user:qwDOt1z4Autl91mUaBtO2crGXIVrEcgg@dpg-crdm7k5svqrc73f8850g-a.ohio-postgres.render.com:5432/todo_game_db_600r
     ports:
       - "13000:8080"
-    depends_on:
-      - db
     command: sh -c "npx knex migrate:latest && npm start"
 
 volumes:
