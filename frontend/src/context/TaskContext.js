@@ -15,7 +15,7 @@ export default function TaskProvider({children}) {
      */
     const fetchTasks = async () => {
         try {
-            const url = process.env.REACT_APP_API_URL + '/api/tasks/';
+            const url =  `${process.env.REACT_APP_API_URL}/api/tasks/`;
             /**
              * Get the data from backend and update task list
              */
@@ -50,7 +50,7 @@ export default function TaskProvider({children}) {
      */
     const addTask = async (newTask) => {
         try {
-            const url = process.env.REACT_APP_API_URL + '/api/tasks/';
+            const url =  `${process.env.REACT_APP_API_URL}/api/tasks/`;
             /**
              * Add the task and fetch it again
              */
@@ -86,7 +86,7 @@ export default function TaskProvider({children}) {
      */
     const updateTask = async (taskInfo, id) => {
         try {
-            const url = process.env.REACT_APP_API_URL + `/api/tasks/${id}`;
+            const url = `${process.env.REACT_APP_API_URL}/api/tasks/${id}`;
             const response = await fetch(url, {
                 method: "PATCH",
                 headers: {
@@ -119,7 +119,7 @@ export default function TaskProvider({children}) {
      */
     const deleteTask = async (id) => {
         try {     
-            const url = process.env.REACT_APP_API_URL + `/api/tasks/${id}`;
+            const url = `${process.env.REACT_APP_API_URL}/api/tasks/${id}`;
             const response = await fetch(url, {
                 method: "DELETE",
                 headers: {
