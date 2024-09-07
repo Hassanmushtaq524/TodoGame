@@ -1,11 +1,11 @@
 ###
-GET http://localhost:13000/api/
+GET https://todogame.onrender.com/api/
 ###
 
 ### USERS ENDPOINTS
 
 ###  fetch the logged in user
-GET http://localhost:13000/api/users/
+GET https://todogame.onrender.com/api/users/
 auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6MX0sImlhdCI6MTcyNTIxNzk5MH0.QgJL0jGKfKxnf2HRI5UuxELSg6KO2GJ5n3JmCuwJlGA
 ###
 

@@ -28,7 +28,7 @@ export default function AuthProvider({children}) {
      * @returns true if successful, false otherwise
      */
     const signupUser = async (userInfo) => {
-        const url = process.env.REACT_APP_API_URL + "/api/users/signup";
+        const url = `${process.env.REACT_APP_API_URL}/api/users/signup`;
         try {
             const response = await fetch(url, {
                 method: "POST",
@@ -69,7 +69,7 @@ export default function AuthProvider({children}) {
      * @returns true if successful, false otherwise
      */
     const loginUser = async (userInfo) => {
-        const url = process.env.REACT_APP_API_URL + "/api/users/login";
+        const url =  `${process.env.REACT_APP_API_URL}/api/users/login`;
         try {
             const response = await fetch(url, {
                 method: "POST",
@@ -128,7 +128,7 @@ export default function AuthProvider({children}) {
      */
     const updateUserLevel = async (xpGained) => {
         // We send a PATCH request to /api/users/ with (xpGained)
-        const url = process.env.REACT_APP_API_URL + "/api/users/"
+        const url = `${process.env.REACT_APP_API_URL}/api/users/`;
         try {
             const response = await fetch(url, {
                 method: "PATCH",
