@@ -5,6 +5,8 @@ services:
     build:
       context: ./frontend
     container_name: todo-game-frontend
+    environment:
+      - REACT_APP_API_URL=https://todogame.onrender.com
     ports:
       - "3000:80"
 
