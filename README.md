@@ -40,17 +40,9 @@ npm i
 
 ### Usage
 
-Frontend and Backend need to be run seperately
+Frontend and Backend are run by a single docker-compose file:
 
-Frontend: 
 ```bash
-cd /todo-game/
-npm run start
-```
-
-Backend:
-```bash
-cd /backend/
 docker-compose up --build
 ```
 
