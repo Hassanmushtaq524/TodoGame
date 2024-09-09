@@ -32,7 +32,13 @@ Libraries used (both frontend and backend):
 Clone the repository
 ```bash
 git clone https://github.com/Hassanmushtaq524/TodoGame.git
+```
+
+Install the packages
+```bash
+cd /frontend/
 npm i
+cd ..
 cd /backend/
 npm i
 ```
